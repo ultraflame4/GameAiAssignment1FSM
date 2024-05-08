@@ -28,7 +28,9 @@ public class Wander : CosbotState
         Debug.Log("Entered Wander state! The bot is now wandering around the convention centre!");
     }
 
-
+    public bool CheckForCosBotWithinLineOfSight(){
+        return Random.value > 0.5;
+    }
 
     protected override void OnExecute()
     {

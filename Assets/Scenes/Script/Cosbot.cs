@@ -43,7 +43,7 @@ public class Cosbot : MonoBehaviour
         State_Wander = new Wander(fsm, this);
         State_TakePicture = new TakePicture(fsm, this);
 
-        fsm.SetInitialState(State_QueryAnime);
+        fsm.SetInitialState(State_ReadEmail);
         
         fsm.StateChanged += (prev, next)=>{
             if (prev == State_CosplayPlanning){
