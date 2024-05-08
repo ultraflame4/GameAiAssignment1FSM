@@ -1,8 +1,8 @@
 using FSM;
 
-public class SponsoredPanel : FSM.State
+public class SponsoredPanel : CosbotState
 {
-    public SponsoredPanel(FiniteStateMachine fsm) : base(fsm)
+    public SponsoredPanel(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

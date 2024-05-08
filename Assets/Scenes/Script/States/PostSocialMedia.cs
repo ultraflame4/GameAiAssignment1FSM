@@ -1,8 +1,8 @@
 using FSM;
 
-public class PostSocialMedia : FSM.State
+public class PostSocialMedia : CosbotState
 {
-    public PostSocialMedia(FiniteStateMachine fsm) : base(fsm)
+    public PostSocialMedia(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

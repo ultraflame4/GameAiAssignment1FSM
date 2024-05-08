@@ -1,8 +1,8 @@
 using FSM;
 
-public class WatchingAnime : FSM.State
+public class WatchingAnime : CosbotState
 {
-    public WatchingAnime(FiniteStateMachine fsm) : base(fsm)
+    public WatchingAnime(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

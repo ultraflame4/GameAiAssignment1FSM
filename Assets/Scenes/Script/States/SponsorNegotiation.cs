@@ -1,8 +1,8 @@
 using FSM;
 
-public class SponsorNegotiation : FSM.State
+public class SponsorNegotiation : CosbotState
 {
-    public SponsorNegotiation(FiniteStateMachine fsm) : base(fsm)
+    public SponsorNegotiation(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

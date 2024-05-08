@@ -1,8 +1,8 @@
 using FSM;
 
-public class Photoshoot : FSM.State
+public class Photoshoot : CosbotState
 {
-    public Photoshoot(FiniteStateMachine fsm) : base(fsm)
+    public Photoshoot(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

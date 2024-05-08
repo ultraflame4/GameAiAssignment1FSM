@@ -1,8 +1,8 @@
 using FSM;
 
-public class TakePicture : FSM.State
+public class TakePicture : CosbotState
 {
-    public TakePicture(FiniteStateMachine fsm) : base(fsm)
+    public TakePicture(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

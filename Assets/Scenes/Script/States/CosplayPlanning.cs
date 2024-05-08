@@ -1,8 +1,8 @@
 using FSM;
 
-public class CosplayPlanning : FSM.State
+public class CosplayPlanning : CosbotState
 {
-    public CosplayPlanning(FiniteStateMachine fsm) : base(fsm)
+    public CosplayPlanning(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

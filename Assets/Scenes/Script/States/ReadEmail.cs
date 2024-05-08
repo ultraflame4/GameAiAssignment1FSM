@@ -1,8 +1,8 @@
 using FSM;
 
-public class ReadEmail : FSM.State
+public class ReadEmail : CosbotState
 {
-    public ReadEmail(FiniteStateMachine fsm) : base(fsm)
+    public ReadEmail(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }

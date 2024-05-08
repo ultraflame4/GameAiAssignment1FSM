@@ -1,8 +1,8 @@
 using FSM;
 
-public class BuyMerch : FSM.State
+public class BuyMerch : CosbotState
 {
-    public BuyMerch(FiniteStateMachine fsm) : base(fsm)
+    public BuyMerch(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
     {
     }
 }
