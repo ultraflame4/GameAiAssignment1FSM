@@ -1,3 +1,8 @@
-public class QueryAnime : FSM.State{
-    
+using FSM;
+
+public class QueryAnime : FSM.State
+{
+    public QueryAnime(FiniteStateMachine fsm) : base(fsm)
+    {
+    }
 }
