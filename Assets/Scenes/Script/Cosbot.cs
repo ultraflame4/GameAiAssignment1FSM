@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-public class Cosbot : MonoBehaviour
+public class Cosbot : FSM.FiniteStateMachine
 {
     public CosbotState State_Wander { get; private set; }
     public CosbotState State_BuyMerch { get; private set; }
@@ -24,29 +24,25 @@ public class Cosbot : MonoBehaviour
     public bool HasConventionEnded { get; private set; } = true;
     public float budget { get; private set; } = 1000;
 
-    private FSM.FiniteStateMachine fsm;
 
 
     private void Start()
     {
-        fsm = new FSM.FiniteStateMachine();
+        State_BuyMerch = new BuyMerch(this);
+        State_CosplayPlanning = new CosplayPlanning(this);
+        State_Photoshoot = new Photoshoot(this);
+        State_PostSocialMedia = new PostSocialMedia(this);
+        State_QueryAnime = new QueryAnime(this);
+        State_ReadEmail = new ReadEmail(this);
+        State_SponsoredPanel = new SponsoredPanel(this);
+        State_SponsorNegotiation = new SponsorNegotiation(this);
+        State_WatchAnime = new WatchAnime(this);
+        State_Wander = new Wander(this);
+        State_TakePicture = new TakePicture(this);
 
+        SetInitialState(State_ReadEmail);
 
-        State_BuyMerch = new BuyMerch(fsm, this);
-        State_CosplayPlanning = new CosplayPlanning(fsm, this);
-        State_Photoshoot = new Photoshoot(fsm, this);
-        State_PostSocialMedia = new PostSocialMedia(fsm, this);
-        State_QueryAnime = new QueryAnime(fsm, this);
-        State_ReadEmail = new ReadEmail(fsm, this);
-        State_SponsoredPanel = new SponsoredPanel(fsm, this);
-        State_SponsorNegotiation = new SponsorNegotiation(fsm, this);
-        State_WatchAnime = new WatchAnime(fsm, this);
-        State_Wander = new Wander(fsm, this);
-        State_TakePicture = new TakePicture(fsm, this);
-
-        fsm.SetInitialState(State_ReadEmail);
-
-        fsm.StateChanged += (prev, next) =>
+        StateChanged += (prev, next) =>
         {
             if (prev == State_CosplayPlanning)
             {
@@ -56,13 +52,6 @@ public class Cosbot : MonoBehaviour
         };
 
     }
-
-
-    private void Update()
-    {
-        fsm.Execute();
-    }
-
 
     IEnumerator ConventionCentreTimeCycle_Coroutine()
     {

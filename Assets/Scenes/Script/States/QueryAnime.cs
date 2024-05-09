@@ -1,10 +1,11 @@
+using System.Collections;
 using FSM;
 using UnityEngine;
 
 public class QueryAnime : CosbotState
 {
     
-    public QueryAnime(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
+    public QueryAnime(Cosbot bot)  : base(bot) 
     {
         Name = "QueryAnime";
     }
@@ -13,8 +14,9 @@ public class QueryAnime : CosbotState
         Debug.Log("Entered Query Anime state!, Querying for anime to watch...");
     }
 
-    public void OnExecute(){
+    protected override IEnumerator OnStart(){
         fsm.Transition(Bot.State_WatchAnime);
+        yield return 0;
     }
 
     protected override void OnExit()

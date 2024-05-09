@@ -1,3 +1,4 @@
+using System.Collections;
 using FSM;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class Wander : CosbotState
 {
     bool nearbyMerchStore = false;
     bool nearbyCosbot = false;
-    public Wander(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
+    public Wander(Cosbot bot)  : base(bot) 
     {
         Name = "Wander";
 
@@ -21,9 +22,9 @@ public class Wander : CosbotState
         return Random.value > 0.5;
     }
 
-    protected override void OnExecute()
+    protected override IEnumerator OnStart()
     {
-
+        yield return 0;
         if (Bot.HasConventionEnded)
         {
             fsm.Transition(Bot.State_PostSocialMedia);
@@ -36,8 +37,6 @@ public class Wander : CosbotState
         {
             fsm.Transition(Bot.State_TakePicture);
         }
-
-        // Random walking code here
     }
 
     protected override void OnExit()

@@ -1,3 +1,4 @@
+using System.Collections;
 using FSM;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Photoshoot : CosbotState
 
     float timeout_secs = 1;
     float timeout_counter = 0;
-    public Photoshoot(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
+    public Photoshoot(Cosbot bot)  : base(bot) 
     {
         Name = "Photoshoot";
     }
@@ -18,13 +19,10 @@ public class Photoshoot : CosbotState
         timeout_counter = 0;
     }
 
-    protected override void OnExecute()
+    protected override IEnumerator OnStart()
     {
-        timeout_counter += Time.deltaTime;
-        if (timeout_counter >= timeout_secs)
-        {
-            fsm.Transition(Bot.State_SponsoredPanel);
-        }
+        yield return new WaitForSeconds(1);
+        fsm.Transition(Bot.State_SponsoredPanel);
     }
 
     protected override void OnExit()

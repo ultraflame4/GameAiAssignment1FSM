@@ -1,41 +1,38 @@
 using System;
+using UnityEngine;
 
 namespace FSM
 {
-    public class FiniteStateMachine
+    public class FiniteStateMachine : MonoBehaviour
     {
 
         public delegate void OnStateChanged(State prev, State next);
         public event OnStateChanged StateChanged;
 
         public State currentState { get; private set; }
+        public Coroutine currentStateCoroutine { get; private set; }
 
+        
         public void SetInitialState(State initialState)
         {
             if (initialState == null) throw new NullReferenceException("The initial state cannot be null!");
             if (currentState == null)
             {
-                currentState = initialState;
-                currentState.Enter();
+                Transition(initialState);
             }
         }
 
         public void Transition(State nextState)
         {
             if (nextState == null) throw new NullReferenceException("Attempted to transition to null state!");
-            if (currentState == null) throw new NullReferenceException("Current state is null!");
 
             StateChanged?.Invoke(currentState, nextState);
 
-            currentState.Exit();
+            if (currentStateCoroutine !=null) StopCoroutine(currentStateCoroutine);
+            currentState?.Exit();
             currentState = nextState;
             currentState.Enter();
-        }
-
-        public void Execute()
-        {
-            if (currentState == null) throw new NullReferenceException("Current state is null!");
-            currentState.Execute();
+            currentStateCoroutine = StartCoroutine(currentState.Start());
         }
 
     }

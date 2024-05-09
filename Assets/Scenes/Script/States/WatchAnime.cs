@@ -1,23 +1,28 @@
+using System.Collections;
 using FSM;
 using UnityEngine;
 
 public class WatchAnime : CosbotState
 {
     public float CompletionPercent { get; private set; }
-    public WatchAnime(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
+    public WatchAnime(Cosbot bot)  : base(bot) 
     {
         Name = "WatchAnime";
     }
     protected override void OnEnter()
     {
         Debug.Log("Started watching anime!");
-        CompletionPercent = 0;
+  
     }
-    protected override void OnExecute()
+    protected override IEnumerator OnStart()
     {
-        if (CompletionPercent >= 1f) fsm.Transition(Bot.State_CosplayPlanning);
-        CompletionPercent = Mathf.Clamp01(CompletionPercent + 0.2f * Time.deltaTime);
-        Debug.Log($"Watch completion: {CompletionPercent * 100}%");
+        CompletionPercent = 0;
+        while (CompletionPercent >= 1f){
+            Debug.Log($"Watch completion: {CompletionPercent * 100}%");
+            CompletionPercent = Mathf.Clamp01(CompletionPercent + 0.2f * Time.deltaTime);
+            yield return 0;
+        }
+        fsm.Transition(Bot.State_CosplayPlanning);
     }
 
     protected override void OnExit()

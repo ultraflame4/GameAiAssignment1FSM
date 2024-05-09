@@ -1,29 +1,23 @@
 using UnityEngine;
 using FSM;
+using System.Collections;
 
 public class CosplayPlanning : CosbotState
 {
 
-    float timeout_secs = 1;
-    float timeout_counter = 0;
-    public CosplayPlanning(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
+    public CosplayPlanning(Cosbot bot)  : base(bot) 
     {
         Name = "CosplayPlanning";
     }
     protected override void OnEnter()
     {
         Debug.Log("Entered CosplayPlanning state! The bot is now carefully reviewing materials and planning its cosplay!");
-        timeout_counter = 0;
     }
 
-    protected override void OnExecute()
+    protected override IEnumerator OnStart()
     {
-        timeout_counter += Time.deltaTime;
-        if (timeout_counter >= timeout_secs)
-        {
-            fsm.Transition(Bot.isSponsored ? Bot.State_Photoshoot : Bot.State_Wander);
-            return;
-        }
+        yield return new WaitForSeconds(1);
+        fsm.Transition(Bot.isSponsored ? Bot.State_Photoshoot : Bot.State_Wander);
     }
 
     protected override void OnExit()
