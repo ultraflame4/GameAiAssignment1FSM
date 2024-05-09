@@ -7,15 +7,16 @@ public class WatchAnime : CosbotState
     public float CompletionPercent { get; private set; }
     public WatchAnime(Cosbot bot)  : base(bot) 
     {
-        Name = "WatchAnime";
+        // Name = "WatchAnime";
     }
     protected override void OnEnter()
     {
-        Debug.Log("Started watching anime!");
+        // Debug.Log("Started watching anime!");
   
     }
     protected override IEnumerator OnStart()
     {
+        Debug.Log("WATCH_ANIME: Watching selected anime...");
         CompletionPercent = 0;
         while (CompletionPercent < 1f){
             CompletionPercent = Mathf.Clamp01(CompletionPercent + 0.25f);
@@ -27,6 +28,6 @@ public class WatchAnime : CosbotState
 
     protected override void OnExit()
     {
-        Debug.Log("Finished watching anime!");
+        // Debug.Log("Finished watching anime!");
     }
 }

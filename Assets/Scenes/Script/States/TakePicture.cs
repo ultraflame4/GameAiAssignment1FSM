@@ -10,13 +10,13 @@ public class TakePicture : CosbotState
 
     protected override IEnumerator OnStart()
     {
-        Debug.Log("Approach other Cos-Bot");
-        yield return new WaitForSeconds(0.1f);
-        Debug.Log("Asking for permission...");
-        yield return new WaitForSeconds(0.2f);
-        Debug.Log("Taking pictures...");
+        Debug.Log("TAKE_PICTURE: Approaching other bot... Taking picture with other bot...");
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Finished Taking picture, transition back to wander");
+        // Debug.Log("Asking for permission...");
+        // yield return new WaitForSeconds(0.2f);
+        // Debug.Log("Taking pictures...");
+        // yield return new WaitForSeconds(0.5f);
+        // Debug.Log("Finished Taking picture, transition back to wander");
         fsm.Transition(Bot.State_Wander);
     }
 }

@@ -7,13 +7,13 @@ public class Wander : CosbotState
 
     public Wander(Cosbot bot) : base(bot)
     {
-        Name = "Wander";
+        // Name = "Wander";
 
     }
 
     protected override void OnEnter()
     {
-        Debug.Log("Entered Wander state!");
+        // Debug.Log("Entered Wander state!");
     }
 
     public bool CheckForCosBotWithinLineOfSight()
@@ -23,7 +23,7 @@ public class Wander : CosbotState
 
     protected override IEnumerator OnStart()
     {
-        Debug.Log("Begin random walk...");
+        Debug.Log("WANDER: Wandering around the convention centre...");
 
         bool nearbyMerchStore = Random.value > 0.35;
         bool nearbyCosbot = Random.value > 0.5;
@@ -41,7 +41,7 @@ public class Wander : CosbotState
             yield return new WaitForSeconds(0.1f);
         }
         
-        Debug.Log("Convention ended");
+        // Debug.Log("Convention ended");
         fsm.Transition(Bot.State_PostSocialMedia);
 
 
@@ -49,6 +49,6 @@ public class Wander : CosbotState
 
     protected override void OnExit()
     {
-        Debug.Log("Exit Wander state!");
+        // Debug.Log("Exit Wander state!");
     }
 }

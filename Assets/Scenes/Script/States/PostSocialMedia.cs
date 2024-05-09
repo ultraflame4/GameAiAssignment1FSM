@@ -10,9 +10,8 @@ public class PostSocialMedia : CosbotState
 
     protected override IEnumerator OnStart()
     {
-        Debug.Log("Posting pictures on social media...");
+        Debug.Log("POST_SOCIAL_MEDIA: Posting pictures on social media...");
         yield return new WaitForSeconds(2);
-        Debug.Log("Finished posting pictures!");
         fsm.Transition(Bot.State_ReadEmail);
     
     }

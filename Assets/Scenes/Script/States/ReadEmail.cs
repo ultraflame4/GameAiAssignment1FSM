@@ -4,25 +4,23 @@ using System.Collections;
 
 public class ReadEmail : CosbotState
 {
-    float timeout_secs = 1;
-    float timeout_counter = 0;
 
     public ReadEmail(Cosbot bot)  : base(bot) 
     {
-        Name = "READ_EMAIL";
+        // Name = "READ_EMAIL";
     }
 
     protected override void OnEnter()
     {
-        Debug.Log("Entered ReadEmail state! The bot is now picking an email to read.");
+        // Debug.Log("Entered ReadEmail state! The bot is now picking an email to read.");
     }
 
     protected override IEnumerator OnStart()
     {
+        Debug.Log("READ_EMAIL: Reading email...");
         yield return new WaitForSeconds(1);
-
+        // Debug.Log($"Read email of type {email.type}");
         var email = Bot.ReadEmail();
-        Debug.Log($"Read email of type {email.type}");
         switch (email.type)
         {
             case CosbotEmailType.SPONSOR:
@@ -41,6 +39,6 @@ public class ReadEmail : CosbotState
 
     protected override void OnExit()
     {
-        Debug.Log("Exit ReadEmail state!");
+        // Debug.Log("Exit ReadEmail state!");
     }
 }

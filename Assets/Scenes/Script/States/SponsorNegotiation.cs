@@ -11,7 +11,7 @@ public class SponsorNegotiation : CosbotState
     protected override IEnumerator OnStart()
     {
         Bot.isSponsored = false;
-        Debug.Log("Negotiating with sponsor...");
+        Debug.Log("SPONSOR_NEGOTIATION: Negotiating with sponsor...");
         yield return new WaitForSeconds(1);
         if (Random.value > 0.5f)
         {
@@ -21,8 +21,8 @@ public class SponsorNegotiation : CosbotState
         else
         {
             Bot.isSponsored = true;
-            fsm.Transition(Bot.State_CosplayPlanning);
             Debug.Log("Negotiations success!");
+            fsm.Transition(Bot.State_CosplayPlanning);
         }
 
     }
