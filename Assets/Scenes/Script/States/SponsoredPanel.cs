@@ -20,7 +20,7 @@ public class SponsoredPanel : CosbotState
     protected override IEnumerator OnStart()
     {
         yield return new WaitForSeconds(1);
-
+        Debug.Log("Doing sponsor stuff...");
         fsm.Transition(Bot.State_Wander);
 
     }

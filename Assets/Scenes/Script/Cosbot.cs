@@ -63,11 +63,6 @@ public class Cosbot : FSM.FiniteStateMachine
 
     public CosbotEmail ReadEmail()
     {
-        return new CosbotEmail()
-        {
-            name = Guid.NewGuid().ToString(),
-            type = CosbotEmailType.SPAM
-        };
         var values = Enum.GetValues(typeof(CosbotEmailType));
         var rand = new System.Random();
 

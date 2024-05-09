@@ -15,12 +15,13 @@ public class Photoshoot : CosbotState
 
     protected override void OnEnter()
     {
-        Debug.Log("Entered Photoshoot state! The bot is now at a professional photoshoot nearby the convetion and taking pictures for brands promotions.");
+        Debug.Log("Entered Photoshoot state!");
         timeout_counter = 0;
     }
 
     protected override IEnumerator OnStart()
     {
+        Debug.Log("Taking pictures for collab.");
         yield return new WaitForSeconds(1);
         fsm.Transition(Bot.State_SponsoredPanel);
     }

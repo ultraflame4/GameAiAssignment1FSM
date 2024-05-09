@@ -17,6 +17,7 @@ public class CosplayPlanning : CosbotState
     protected override IEnumerator OnStart()
     {
         yield return new WaitForSeconds(1);
+        Debug.Log("Planning for cosplay...");
         fsm.Transition(Bot.isSponsored ? Bot.State_Photoshoot : Bot.State_Wander);
     }
 
