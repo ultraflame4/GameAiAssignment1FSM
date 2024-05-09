@@ -20,7 +20,7 @@ public class Photoshoot : CosbotState
     {
         Debug.Log("PHOTOSHOOT: Doing a professional photoshoot for a collab...");
         yield return new WaitForSeconds(1);
-        fsm.Transition(Bot.State_SponsoredPanel);
+        fsm.Transition(Bot.State_Wander);
     }
 
     protected override void OnExit()

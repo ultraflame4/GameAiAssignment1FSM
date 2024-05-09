@@ -20,6 +20,8 @@ public class ReadEmail : CosbotState
         Debug.Log("READ_EMAIL: Reading email...");
         yield return new WaitForSeconds(1);
         // Debug.Log($"Read email of type {email.type}");
+        Bot.isSponsored=false;
+        Bot.isCollabing=false;
         var email = Bot.ReadEmail();
         switch (email.type)
         {
@@ -27,6 +29,7 @@ public class ReadEmail : CosbotState
                 fsm.Transition(Bot.State_SponsorNegotiation);
                 break;
             case CosbotEmailType.COLLAB:
+                Bot.isCollabing=true;
                 fsm.Transition(Bot.State_CosplayPlanning);
                 break;
             default:

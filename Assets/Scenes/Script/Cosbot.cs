@@ -20,6 +20,7 @@ public class Cosbot : FSM.FiniteStateMachine
     public CosbotState State_TakePicture { get; private set; }
 
     public bool isSponsored = false;
+    public bool isCollabing = false;
 
     public bool HasConventionEnded { get; private set; } = true;
     public float budget = 1000;

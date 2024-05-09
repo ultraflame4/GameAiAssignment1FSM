@@ -5,7 +5,7 @@ using System.Collections;
 public class CosplayPlanning : CosbotState
 {
 
-    public CosplayPlanning(Cosbot bot)  : base(bot) 
+    public CosplayPlanning(Cosbot bot) : base(bot)
     {
         // Name = "CosplayPlanning";
     }
@@ -18,7 +18,17 @@ public class CosplayPlanning : CosbotState
     {
         Debug.Log("COSPLAY_PLANNING: Planning for cosplay...");
         yield return new WaitForSeconds(1);
-        fsm.Transition(Bot.isSponsored ? Bot.State_Photoshoot : Bot.State_Wander);
+        if (Bot.isSponsored)
+        {
+            fsm.Transition(Bot.State_SponsoredPanel);
+        }
+        else if (Bot.isCollabing){
+            fsm.Transition(Bot.State_Photoshoot);
+        }
+        else{
+            fsm.Transition(Bot.State_Wander);
+        }
+
     }
 
     protected override void OnExit()
