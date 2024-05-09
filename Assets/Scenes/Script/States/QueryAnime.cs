@@ -15,6 +15,7 @@ public class QueryAnime : CosbotState
     }
 
     protected override IEnumerator OnStart(){
+        Debug.Log("Picked anime, transitioning to watch");
         fsm.Transition(Bot.State_WatchAnime);
         yield return 0;
     }

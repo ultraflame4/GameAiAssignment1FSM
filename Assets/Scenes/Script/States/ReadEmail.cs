@@ -22,6 +22,7 @@ public class ReadEmail : CosbotState
         yield return new WaitForSeconds(1);
 
         var email = Bot.ReadEmail();
+        Debug.Log($"Read email of type {email.type}");
         switch (email.type)
         {
             case CosbotEmailType.SPONSOR:
@@ -34,7 +35,8 @@ public class ReadEmail : CosbotState
                 fsm.Transition(Bot.State_QueryAnime);
                 break;
         }
-
+ 
+    
     }
 
     protected override void OnExit()

@@ -17,10 +17,10 @@ public class WatchAnime : CosbotState
     protected override IEnumerator OnStart()
     {
         CompletionPercent = 0;
-        while (CompletionPercent >= 1f){
+        while (CompletionPercent < 1f){
+            CompletionPercent = Mathf.Clamp01(CompletionPercent + 0.25f);
             Debug.Log($"Watch completion: {CompletionPercent * 100}%");
-            CompletionPercent = Mathf.Clamp01(CompletionPercent + 0.2f * Time.deltaTime);
-            yield return 0;
+            yield return new WaitForSeconds(0.4f);
         }
         fsm.Transition(Bot.State_CosplayPlanning);
     }

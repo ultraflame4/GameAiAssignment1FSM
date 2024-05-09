@@ -25,7 +25,6 @@ public class Cosbot : FSM.FiniteStateMachine
     public float budget { get; private set; } = 1000;
 
 
-
     private void Start()
     {
         State_BuyMerch = new BuyMerch(this);
@@ -49,6 +48,7 @@ public class Cosbot : FSM.FiniteStateMachine
                 // Start convention timer
                 StartCoroutine(ConventionCentreTimeCycle_Coroutine());
             }
+            Debug.Log($"FSM STATE CHANGED: {prev} -> {next}");
         };
 
     }
@@ -63,6 +63,11 @@ public class Cosbot : FSM.FiniteStateMachine
 
     public CosbotEmail ReadEmail()
     {
+        return new CosbotEmail()
+        {
+            name = Guid.NewGuid().ToString(),
+            type = CosbotEmailType.SPAM
+        };
         var values = Enum.GetValues(typeof(CosbotEmailType));
         var rand = new System.Random();
 
