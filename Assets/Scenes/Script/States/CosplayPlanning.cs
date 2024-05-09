@@ -9,16 +9,6 @@ public class CosplayPlanning : CosbotState
     public CosplayPlanning(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
     {
         Name = "CosplayPlanning";
-
-        Transitions.Add(() =>
-        {
-            if (timeout_counter >= timeout_secs)
-            {
-                return bot.isSponsored ? bot.State_Photoshoot : bot.State_Wander;
-            }
-
-            return null;
-        });
     }
     protected override void OnEnter()
     {
@@ -29,6 +19,11 @@ public class CosplayPlanning : CosbotState
     protected override void OnExecute()
     {
         timeout_counter += Time.deltaTime;
+        if (timeout_counter >= timeout_secs)
+        {
+            fsm.Transition(Bot.isSponsored ? Bot.State_Photoshoot : Bot.State_Wander);
+            return;
+        }
     }
 
     protected override void OnExit()

@@ -9,15 +9,6 @@ public class SponsoredPanel : CosbotState
     public SponsoredPanel(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
     {
         Name = "SponsoredPanel";
-        Transitions.Add(() =>
-        {
-            if (timeout_counter >= timeout_secs)
-            {
-                return bot.State_Wander;
-            }
-
-            return null;
-        });
     }
 
 
@@ -30,6 +21,10 @@ public class SponsoredPanel : CosbotState
     protected override void OnExecute()
     {
         timeout_counter += Time.deltaTime;
+        if (timeout_counter >= timeout_secs)
+        {
+            fsm.Transition(Bot.State_Wander);
+        }
     }
 
     protected override void OnExit()

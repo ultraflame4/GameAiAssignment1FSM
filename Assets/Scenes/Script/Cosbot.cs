@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using FSM;
 using UnityEngine;
@@ -20,8 +21,8 @@ public class Cosbot : MonoBehaviour
 
     public bool isSponsored = false;
 
-    public bool HasConventionEnded {get; private set;} = true;
-    public float budget {get; private set;} = 1000;
+    public bool HasConventionEnded { get; private set; } = true;
+    public float budget { get; private set; } = 1000;
 
     private FSM.FiniteStateMachine fsm;
 
@@ -44,24 +45,44 @@ public class Cosbot : MonoBehaviour
         State_TakePicture = new TakePicture(fsm, this);
 
         fsm.SetInitialState(State_ReadEmail);
-        
-        fsm.StateChanged += (prev, next)=>{
-            if (prev == State_CosplayPlanning){
+
+        fsm.StateChanged += (prev, next) =>
+        {
+            if (prev == State_CosplayPlanning)
+            {
                 // Start convention timer
                 StartCoroutine(ConventionCentreTimeCycle_Coroutine());
             }
         };
-        
+
     }
 
 
-    IEnumerator ConventionCentreTimeCycle_Coroutine(){
+    private void Update()
+    {
+        fsm.Execute();
+    }
+
+
+    IEnumerator ConventionCentreTimeCycle_Coroutine()
+    {
         HasConventionEnded = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         HasConventionEnded = true;
         budget = 1000;
     }
-    
 
-    
+    public CosbotEmail ReadEmail()
+    {
+        var values = Enum.GetValues(typeof(CosbotEmailType));
+        var rand = new System.Random();
+
+        return new CosbotEmail()
+        {
+            name = Guid.NewGuid().ToString(),
+            type = (CosbotEmailType)values.GetValue(rand.Next(values.Length))
+        };
+    }
+
+
 }

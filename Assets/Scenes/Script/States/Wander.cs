@@ -9,18 +9,6 @@ public class Wander : CosbotState
     {
         Name = "Wander";
 
-        Transitions.Add(()=>{
-            if (bot.HasConventionEnded){
-                return bot.State_PostSocialMedia;
-            }
-            if (nearbyMerchStore && bot.budget > 0){
-                return bot.State_BuyMerch;
-            }
-            if (nearbyCosbot){
-                return bot.State_TakePicture;
-            }
-            return null;
-        });
     }
 
     protected override void OnEnter()
@@ -28,12 +16,27 @@ public class Wander : CosbotState
         Debug.Log("Entered Wander state! The bot is now wandering around the convention centre!");
     }
 
-    public bool CheckForCosBotWithinLineOfSight(){
+    public bool CheckForCosBotWithinLineOfSight()
+    {
         return Random.value > 0.5;
     }
 
     protected override void OnExecute()
     {
+
+        if (Bot.HasConventionEnded)
+        {
+            fsm.Transition(Bot.State_PostSocialMedia);
+        }
+        if (nearbyMerchStore && Bot.budget > 0)
+        {
+            fsm.Transition(Bot.State_BuyMerch);
+        }
+        if (nearbyCosbot)
+        {
+            fsm.Transition(Bot.State_TakePicture);
+        }
+
         // Random walking code here
     }
 

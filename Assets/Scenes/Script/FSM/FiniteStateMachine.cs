@@ -13,7 +13,11 @@ namespace FSM
         public void SetInitialState(State initialState)
         {
             if (initialState == null) throw new NullReferenceException("The initial state cannot be null!");
-            if (currentState == null) currentState = initialState;
+            if (currentState == null)
+            {
+                currentState = initialState;
+                currentState.Enter();
+            }
         }
 
         public void Transition(State nextState)

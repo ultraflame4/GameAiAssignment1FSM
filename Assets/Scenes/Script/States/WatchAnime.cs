@@ -3,14 +3,10 @@ using UnityEngine;
 
 public class WatchAnime : CosbotState
 {
-    public float CompletionPercent {get; private set;}
-    public WatchAnime(FiniteStateMachine fsm, Cosbot bot)  : base(fsm, bot) 
+    public float CompletionPercent { get; private set; }
+    public WatchAnime(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
     {
         Name = "WatchAnime";
-        Transitions.Add(()=>{
-            if (CompletionPercent >= 1f) return bot.State_CosplayPlanning;
-            return null;
-        });
     }
     protected override void OnEnter()
     {
@@ -19,8 +15,9 @@ public class WatchAnime : CosbotState
     }
     protected override void OnExecute()
     {
+        if (CompletionPercent >= 1f) fsm.Transition(Bot.State_CosplayPlanning);
         CompletionPercent = Mathf.Clamp01(CompletionPercent + 0.2f * Time.deltaTime);
-        Debug.Log($"Watch completion: {CompletionPercent*100}%");
+        Debug.Log($"Watch completion: {CompletionPercent * 100}%");
     }
 
     protected override void OnExit()

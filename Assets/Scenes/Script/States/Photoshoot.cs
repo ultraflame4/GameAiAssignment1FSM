@@ -9,15 +9,6 @@ public class Photoshoot : CosbotState
     public Photoshoot(FiniteStateMachine fsm, Cosbot bot) : base(fsm, bot)
     {
         Name = "Photoshoot";
-        Transitions.Add(() =>
-        {
-            if (timeout_counter >= timeout_secs)
-            {
-                return bot.State_SponsoredPanel;
-            }
-
-            return null;
-        });
     }
 
 
@@ -30,6 +21,10 @@ public class Photoshoot : CosbotState
     protected override void OnExecute()
     {
         timeout_counter += Time.deltaTime;
+        if (timeout_counter >= timeout_secs)
+        {
+            fsm.Transition(Bot.State_SponsoredPanel);
+        }
     }
 
     protected override void OnExit()
