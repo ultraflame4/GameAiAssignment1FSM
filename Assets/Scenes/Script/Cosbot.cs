@@ -22,7 +22,7 @@ public class Cosbot : FSM.FiniteStateMachine
     public bool isSponsored = false;
 
     public bool HasConventionEnded { get; private set; } = true;
-    public float budget { get; private set; } = 1000;
+    public float budget = 1000;
 
 
     private void Start()

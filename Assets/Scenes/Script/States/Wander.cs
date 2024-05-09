@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Wander : CosbotState
 {
-    bool nearbyMerchStore = false;
-    bool nearbyCosbot = false;
+
     public Wander(Cosbot bot) : base(bot)
     {
         Name = "Wander";
@@ -25,6 +24,10 @@ public class Wander : CosbotState
     protected override IEnumerator OnStart()
     {
         Debug.Log("Begin random walk...");
+
+        bool nearbyMerchStore = Random.value > 0.35;
+        bool nearbyCosbot = Random.value > 0.5;
+
         while (!Bot.HasConventionEnded)
         {
             if (nearbyMerchStore && Bot.budget > 0)
