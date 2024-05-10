@@ -13,6 +13,7 @@ public class SponsorNegotiation : CosbotState
         Bot.isSponsored = false;
         Debug.Log("SPONSOR_NEGOTIATION: Negotiating with sponsor...");
         yield return new WaitForSeconds(1);
+        // 50% - 50% chance of the negotiation failing or succeeding.
         if (Random.value > 0.5f)
         {
             Debug.Log("Negotiations failed.");

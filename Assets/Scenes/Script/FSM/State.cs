@@ -22,6 +22,9 @@ namespace FSM
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerator OnStart() { yield return 0; }
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual void OnExit() { }
 
 
