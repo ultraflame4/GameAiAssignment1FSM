@@ -18,9 +18,11 @@ namespace FSM
         /// </summary>
         public event OnStateChanged StateChanged;
 
-        [field: SerializeField]
-        public State nextState { get; private set; }
         public State currentState { get; private set; }
+        
+        /// <summary>
+        /// Current active coroutine for the current state.
+        /// </summary>
         public Coroutine currentStateCoroutine { get; private set; }
 
 
