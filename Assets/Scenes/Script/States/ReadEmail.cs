@@ -19,10 +19,10 @@ public class ReadEmail : CosbotState
     {
         Debug.Log("READ_EMAIL: Reading email...");
         yield return new WaitForSeconds(1);
-        // Debug.Log($"Read email of type {email.type}");
         Bot.isSponsored=false;
         Bot.isCollabing=false;
         var email = Bot.ReadEmail();
+        Debug.Log($"Read email of type {email.type}");
         switch (email.type)
         {
             case CosbotEmailType.SPONSOR:
